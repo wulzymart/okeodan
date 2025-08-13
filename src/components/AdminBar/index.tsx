@@ -1,31 +1,31 @@
 'use client'
 
-import type { PayloadAdminBarProps, PayloadMeUser } from '@payloadcms/admin-bar'
+import type { PayloadAdminBarProps, PayloadMeUser } from 'payload-admin-bar'
 
-import { cn } from '@/utilities/ui'
 import { useSelectedLayoutSegments } from 'next/navigation'
-import { PayloadAdminBar } from '@payloadcms/admin-bar'
+import { PayloadAdminBar } from 'payload-admin-bar'
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 import './index.scss'
 
+import { cn } from '@/lib/utils'
 import { getClientSideURL } from '@/utilities/getURL'
 
 const baseClass = 'admin-bar'
 
 const collectionLabels = {
-  pages: {
-    plural: 'Pages',
-    singular: 'Page',
+  prides: {
+    plural: 'Prides',
+    singular: 'Pride',
   },
-  posts: {
-    plural: 'Posts',
-    singular: 'Post',
+  news: {
+    plural: 'News',
+    singular: 'News',
   },
-  projects: {
-    plural: 'Projects',
-    singular: 'Project',
+  galleries: {
+    plural: 'galleries',
+    singular: 'gallery',
   },
 }
 
@@ -38,7 +38,7 @@ export const AdminBar: React.FC<{
   const segments = useSelectedLayoutSegments()
   const [show, setShow] = useState(false)
   const collection = (
-    collectionLabels[segments?.[1] as keyof typeof collectionLabels] ? segments[1] : 'pages'
+    collectionLabels[segments?.[1] as keyof typeof collectionLabels] ? segments[1] : 'news'
   ) as keyof typeof collectionLabels
   const router = useRouter()
 
@@ -63,10 +63,10 @@ export const AdminBar: React.FC<{
             user: 'text-white',
           }}
           cmsURL={getClientSideURL()}
-          collectionSlug={collection}
+          collection={collection}
           collectionLabels={{
-            plural: collectionLabels[collection]?.plural || 'Pages',
-            singular: collectionLabels[collection]?.singular || 'Page',
+            plural: collectionLabels[collection]?.plural || 'News',
+            singular: collectionLabels[collection]?.singular || 'News',
           }}
           logo={<Title />}
           onAuthChange={onAuthChange}

@@ -8,14 +8,15 @@ export interface Props {
   className?: string
   fill?: boolean // for NextImage only
   htmlElement?: ElementType | null
-  pictureClassName?: string
+  height?: number,
+  width?: number,
   imgClassName?: string
   onClick?: () => void
   onLoad?: () => void
   loading?: 'lazy' | 'eager' // for NextImage only
   priority?: boolean // for NextImage only
   ref?: Ref<HTMLImageElement | HTMLVideoElement | null>
-  resource?: MediaType | string | number | null // for Payload media
+  resource?: MediaType | string | number // for Payload media
   size?: string // for NextImage only
   src?: StaticImageData // for static media
   videoClassName?: string

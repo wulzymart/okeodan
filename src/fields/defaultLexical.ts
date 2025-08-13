@@ -1,4 +1,4 @@
-import type { TextFieldSingleValidation } from 'payload'
+import { Config } from 'payload'
 import {
   BoldFeature,
   ItalicFeature,
@@ -6,42 +6,44 @@ import {
   ParagraphFeature,
   lexicalEditor,
   UnderlineFeature,
-  type LinkFields,
 } from '@payloadcms/richtext-lexical'
+import { ClearFormatFeature } from '@/lexical-features/clear-format/server'
+import { FontSize } from '@/lexical-features/font-size/server'
+import { FontWeight } from '@/lexical-features/font-weight/server'
+import { ColorFeature } from '@/lexical-features/colour/server'
 
-export const defaultLexical = lexicalEditor({
-  features: [
-    ParagraphFeature(),
-    UnderlineFeature(),
-    BoldFeature(),
-    ItalicFeature(),
-    LinkFeature({
-      enabledCollections: ['pages', 'posts'],
-      fields: ({ defaultFields }) => {
-        const defaultFieldsWithoutUrl = defaultFields.filter((field) => {
-          if ('name' in field && field.name === 'url') return false
-          return true
-        })
+export const defaultLexical: Config['editor'] = lexicalEditor({
+  features: () => {
+    return [
+      ParagraphFeature(),
+      UnderlineFeature(),
+      BoldFeature(),
+      ItalicFeature(),
+      LinkFeature({
+        enabledCollections: ['news', 'prides'],
+        fields: ({ defaultFields }) => {
+          const defaultFieldsWithoutUrl = defaultFields.filter((field) => {
+            return !('name' in field && field.name === 'url')
+          })
 
-        return [
-          ...defaultFieldsWithoutUrl,
-          {
-            name: 'url',
-            type: 'text',
-            admin: {
-              condition: (_data, siblingData) => siblingData?.linkType !== 'internal',
+          return [
+            ...defaultFieldsWithoutUrl,
+            {
+              name: 'url',
+              type: 'text',
+              admin: {
+                condition: ({ linkType }) => linkType !== 'internal',
+              },
+              label: ({ t }) => t('fields:enterURL'),
+              required: true,
             },
-            label: ({ t }) => t('fields:enterURL'),
-            required: true,
-            validate: ((value, options) => {
-              if ((options?.siblingData as LinkFields)?.linkType === 'internal') {
-                return true // no validation needed, as no url should exist for internal links
-              }
-              return value ? true : 'URL is required'
-            }) as TextFieldSingleValidation,
-          },
-        ]
-      },
-    }),
-  ],
+          ]
+        },
+      }),
+      FontSize(),
+      FontWeight(),
+      ColorFeature(),
+      ClearFormatFeature(),
+    ]
+  },
 })

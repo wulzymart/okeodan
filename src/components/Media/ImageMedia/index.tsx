@@ -2,16 +2,22 @@
 
 import type { StaticImageData } from 'next/image'
 
-import { cn } from '@/utilities/ui'
+import { cn } from '@/lib/utils'
 import NextImage from 'next/image'
 import React from 'react'
 
 import type { Props as MediaProps } from '../types'
 
-import { cssVariables } from '@/cssVariables'
-import { getMediaUrl } from '@/utilities/getMediaUrl'
+import { getClientSideURL } from '@/utilities/getURL'
 
-const { breakpoints } = cssVariables
+const breakpoints = {
+  '3xl': 1920,
+  '2xl': 1536,
+  xl: 1280,
+  lg: 1024,
+  md: 768,
+  sm: 640,
+}
 
 // A base64 encoded image to use as a placeholder while the image is loading
 const placeholderBlur =
@@ -21,7 +27,8 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
   const {
     alt: altFromProps,
     fill,
-    pictureClassName,
+    width: widthFromProps,
+    height: heightFromProps,
     imgClassName,
     priority,
     resource,
@@ -38,13 +45,13 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
   if (!src && resource && typeof resource === 'object') {
     const { alt: altFromResource, height: fullHeight, url, width: fullWidth } = resource
 
-    width = fullWidth!
-    height = fullHeight!
+    width = widthFromProps || fullWidth!
+    height = heightFromProps || fullHeight!
     alt = altFromResource || ''
 
     const cacheTag = resource.updatedAt
 
-    src = getMediaUrl(url, cacheTag)
+    src = `${getClientSideURL()}${url}?${cacheTag}`
   }
 
   const loading = loadingFromProps || (!priority ? 'lazy' : undefined)
@@ -57,7 +64,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
         .join(', ')
 
   return (
-    <picture className={cn(pictureClassName)}>
+    <picture>
       <NextImage
         alt={alt || ''}
         className={cn(imgClassName)}

@@ -46,6 +46,10 @@ const config = {
       },
     },
     extend: {
+      backgroundImage: {
+        'okd-street': "url('/okeodan-nav-bg.jpeg')",
+        oba: "url('/Okeodan-king.png')",
+      },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
@@ -94,8 +98,7 @@ const config = {
         warning: 'hsl(var(--warning))',
       },
       fontFamily: {
-        mono: ['var(--font-geist-mono)'],
-        sans: ['var(--font-geist-sans)'],
+        playfair: ['Playfair Display', 'serif'],
       },
       keyframes: {
         'accordion-down': {
