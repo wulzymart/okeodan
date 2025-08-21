@@ -3,6 +3,7 @@ import Slider from '@/components/home-components/hero-slider/slider'
 import ObasSpeech from '@/components/home-components/obas-speech'
 import NewsGridComponent from '@/components/home-components/news/news'
 import PlaceSlider from '@/components/home-components/places-slider/slider'
+import ImageModal from '@/components/home-components/image-modal'
 
 export default async function HomePage() {
   return (
@@ -11,6 +12,7 @@ export default async function HomePage() {
       <ObasSpeech />
       <PlaceSlider />
       <NewsGridComponent />
+      <ImageModal />
     </div>
   )
 }
