@@ -363,6 +363,7 @@ export interface Pride {
   title: string;
   featuredImage: string | Media;
   communities?: (string | Community)[] | null;
+  isFeatured?: boolean | null;
   content: {
     root: {
       type: string;
@@ -401,6 +402,7 @@ export interface Gallery {
   slugLock?: boolean | null;
   title: string;
   type: 'place' | 'event' | 'festival' | 'development';
+  isFeatured?: boolean | null;
   description: string;
   images: {
     image: string | Media;
@@ -764,6 +766,7 @@ export interface PridesSelect<T extends boolean = true> {
   title?: T;
   featuredImage?: T;
   communities?: T;
+  isFeatured?: T;
   content?: T;
   meta?:
     | T
@@ -786,6 +789,7 @@ export interface GalleriesSelect<T extends boolean = true> {
   slugLock?: T;
   title?: T;
   type?: T;
+  isFeatured?: T;
   description?: T;
   images?:
     | T

@@ -2,10 +2,7 @@
 
 @plugin 'tailwindcss-animate';
 
-/* @import 'tailwindcss'; */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
 @property --primary-color {
   syntax: '<color>';

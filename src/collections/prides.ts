@@ -71,6 +71,13 @@ export const Prides: CollectionConfig = {
       },
     },
     {
+      name: 'isFeatured',
+      type: 'checkbox',
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
       type: 'tabs',
       tabs: [
         {

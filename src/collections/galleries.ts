@@ -72,6 +72,13 @@ export const Galleries: CollectionConfig = {
       required: true,
     },
     {
+      name: 'isFeatured',
+      type: 'checkbox',
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
       name: 'description',
       type: 'textarea',
       required: true,

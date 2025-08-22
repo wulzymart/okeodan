@@ -1,5 +1,5 @@
 import React from 'react'
-import './globals.css'
+import './frontend.css'
 import Header from '@/components/header/header'
 import Footer from '@/components/footer/footer'
 import { AdminBar } from '@/components/AdminBar'
