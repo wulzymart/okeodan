@@ -19,11 +19,14 @@ const PlaceSlider = async () => {
       type: {
         equals: 'place',
       },
+      isFeatured: {
+        equals: true,
+      },
       _status: {
         equals: 'published',
       },
     },
-    limit: 5,
+    limit: 10,
   })
   if (docs.length === 0) return <></>
 
