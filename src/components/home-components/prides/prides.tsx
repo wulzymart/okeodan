@@ -1,10 +1,7 @@
 import React from 'react'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import { BentoGrid, BentoGridItem } from '@/components/ui/bento-grid'
-import Image from 'next/image'
 import Link from 'next/link'
-import { Media } from '@/payload-types'
 import ListCardBgNoExcerpt from '@/components/post-cards/list-card-with-bg-no-excerpt'
 const PridesGridComponent = async () => {
   const payload = await getPayload({ config: configPromise })
