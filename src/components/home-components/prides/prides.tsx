@@ -6,10 +6,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Media } from '@/payload-types'
 
-const NewsGridComponent = async () => {
+const PridesGridComponent = async () => {
   const payload = await getPayload({ config: configPromise })
-  const { docs: newsList } = await payload.find({
-    collection: 'news',
+  const { docs: pridesList } = await payload.find({
+    collection: 'prides',
     limit: 6,
     where: {
       _status: {
@@ -27,9 +27,9 @@ const NewsGridComponent = async () => {
   })
   return (
     <section className='className="w-[90vh] mx-auto my-10 text-center space-y-10'>
-      <h3 className="font-playfair text-3xl font-bold">Echoes from Oke-Odan</h3>
+      <h3 className="font-playfair text-3xl font-bold">Prides of Oke-Odan</h3>
       <BentoGrid className="max-w-4xl mx-auto">
-        {newsList.map(async ({ featuredImage, title, slug }, i) => {
+        {pridesList.map(async ({ featuredImage, title, slug }, i) => {
           const img =
             typeof featuredImage === 'string'
               ? '/dark-bg.jpg'
@@ -37,7 +37,7 @@ const NewsGridComponent = async () => {
                 (featuredImage as Media).url ||
                 '/dark-bg.jpg'
           return (
-            <Link key={i} href={`/oke-odan-news/${slug}`}>
+            <Link key={i} href={`/prides-of-oke-odan/${slug}`}>
               <div className="w-xs">
                 <BentoGridItem
                   title={title}
@@ -54,7 +54,7 @@ const NewsGridComponent = async () => {
       </BentoGrid>
       <div className="mt-10">
         <Link
-          href="/oke-odan-news"
+          href="/prides-of-oke-odan"
           className="py-2 min-w-[150px] px-4 rounded-lg text-lg font-bold border-2 border-solid border-[var(--accent)] bg-transparent text-[var(--accent)] hover:text-white hover:bg-[var(--accent)] cursor-pointer"
         >
           View More
@@ -64,4 +64,4 @@ const NewsGridComponent = async () => {
   )
 }
 
-export default NewsGridComponent
+export default PridesGridComponent

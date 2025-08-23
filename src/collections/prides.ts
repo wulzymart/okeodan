@@ -10,6 +10,17 @@ import {
 } from '@payloadcms/plugin-seo/fields'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 import { slugField } from '@/fields/slug'
+import { MediaBlock } from '@/blocks/MediaBlock/config'
+import { InlineMediaBlock } from '@/blocks/Inline-media/config'
+import { VideoEmbedBlock } from '@/blocks/VideoEmbedBlock/config'
+import {
+  BlocksFeature,
+  FixedToolbarFeature,
+  HeadingFeature,
+  HorizontalRuleFeature,
+  InlineToolbarFeature,
+  lexicalEditor,
+} from '@payloadcms/richtext-lexical'
 export const Prides: CollectionConfig = {
   slug: 'prides',
   admin: {
@@ -86,6 +97,20 @@ export const Prides: CollectionConfig = {
             {
               name: 'content',
               type: 'richText',
+              editor: lexicalEditor({
+                features: ({ rootFeatures }) => {
+                  return [
+                    ...rootFeatures,
+                    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+                    BlocksFeature({
+                      blocks: [MediaBlock, InlineMediaBlock, VideoEmbedBlock],
+                    }),
+                    FixedToolbarFeature(),
+                    InlineToolbarFeature(),
+                    HorizontalRuleFeature(),
+                  ]
+                },
+              }),
               required: true,
             },
           ],
