@@ -15,6 +15,9 @@ const PridesGridComponent = async () => {
       _status: {
         equals: 'published',
       },
+      isFeatured: {
+        equals: true,
+      },
     },
     overrideAccess: false,
     pagination: false,
