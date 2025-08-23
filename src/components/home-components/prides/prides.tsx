@@ -5,7 +5,7 @@ import { BentoGrid, BentoGridItem } from '@/components/ui/bento-grid'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Media } from '@/payload-types'
-
+import ListCardBgNoExcerpt from '@/components/post-cards/list-card-with-bg-no-excerpt'
 const PridesGridComponent = async () => {
   const payload = await getPayload({ config: configPromise })
   const { docs: pridesList } = await payload.find({
@@ -28,30 +28,18 @@ const PridesGridComponent = async () => {
   return (
     <section className='className="w-[90vh] mx-auto my-10 text-center space-y-10'>
       <h3 className="font-playfair text-3xl font-bold">Prides of Oke-Odan</h3>
-      <BentoGrid className="max-w-4xl mx-auto">
+
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
         {pridesList.map(async ({ featuredImage, title, slug }, i) => {
-          const img =
-            typeof featuredImage === 'string'
-              ? '/dark-bg.jpg'
-              : (featuredImage as Media).thumbnailURL ||
-                (featuredImage as Media).url ||
-                '/dark-bg.jpg'
           return (
             <Link key={i} href={`/prides-of-oke-odan/${slug}`}>
               <div className="w-xs">
-                <BentoGridItem
-                  title={title}
-                  header={
-                    <div className="relative w-full h-46">
-                      <Image fill src={img} alt={title} />
-                    </div>
-                  }
-                />
+                <ListCardBgNoExcerpt title={title} featuredImage={featuredImage} />
               </div>
             </Link>
           )
         })}
-      </BentoGrid>
+      </div>
       <div className="mt-10">
         <Link
           href="/prides-of-oke-odan"
